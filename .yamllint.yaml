@@ -7,8 +7,11 @@ rules:
     level: warning
   indentation:
     spaces: 2
-
-ignore: |
-  .git/
-  node_modules/
-  vendor/
+  braces:
+    level: warning
+  trailing-spaces:
+    level: warning
+  document-start:
+    level: warning
+  truthy:
+    level: warning
