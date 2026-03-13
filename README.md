@@ -84,74 +84,60 @@ Best for: Complete DevOps agentic ecosystem
 
 ### 1. Infrastructure Exploration
 
-```mermaid
-flowchart LR
-    User --> InspectCmd[/inspect]
-    InspectCmd --> Inspector[Inspector Agent]
-    Inspector --> Collect[Collect Context]
-    Collect --> K8s[Kubernetes]
-    Collect --> Cloud[AWS/GCP/Azure]
-    Collect --> TF[Terraform State]
-    K8s --> Topology[Map Topology]
-    Cloud --> Topology
-    TF --> Topology
-    Topology --> Results[Return Results]
+```
+User runs: /inspect cluster prod-eks
+
+Inspector Agent collects context:
+  → Kubernetes cluster topology
+  → Cloud resources (AWS/GCP/Azure)
+  → Terraform state
+  → Recent deployments & incidents
+
+Returns: topology map, SLO status, resource inventory
 ```
 
 ### 2. Zero-Downtime Deployment
 
-```mermaid
-flowchart TD
-    User --> DeployCmd[/deploy canary]
-    DeployCmd --> Deployer[Deployer Agent]
-    Deployer --> PreCheck{Pre-checks}
-    PreCheck -->|Fail| Abort[Abort & Notify]
-    PreCheck -->|Pass| Canary[Deploy 5% Canary]
-    Canary --> Monitor[Monitor SLOs]
-    Monitor --> Healthy{Healthy?}
-    Healthy -->|Yes| Promote25[Promote 25%]
-    Healthy -->|No| Rollback[Auto Rollback]
-    Promote25 --> Promote50[Promote 50%]
-    Promote50 --> Promote100[Promote 100%]
-    Promote100 --> Success[Success]
+```
+User runs: /deploy service:payments image:v2.1.0 --env prod --strategy canary
+
+Deployer Agent:
+  → Pre-checks (change freeze, SLO, incidents)
+  → Deploy 5% canary
+  → Monitor metrics (error rate, latency)
+  → Auto-promote or auto-rollback
+  → Verify health post-deploy
+
+Result: promoted to 100% or rolled back
 ```
 
 ### 3. Incident Response
 
-```mermaid
-flowchart LR
-    Alert --> IncidentCmd[/incident declare]
-    IncidentCmd --> IC[Incident Commander]
-    IC --> WarRoom[Create War Room]
-    WarRoom --> Timeline[Assemble Timeline]
-    Timeline --> Logs[Analyze Logs]
-    Timeline --> Metrics[Check Metrics]
-    Timeline --> Deploys[Review Deploys]
-    Logs --> Mitigate[Suggest Mitigations]
-    Metrics --> Mitigate
-    Deploys --> Mitigate
-    Mitigate --> Action[Engineer Action]
-    Action --> Resolve[Resolve]
-    Resolve --> Postmortem[Generate Postmortem]
+```
+Alert fires → /incident declare sev:2 title:"Payment API 500 spike"
+
+Incident Commander:
+  → Creates war room (Slack + PagerDuty)
+  → Assembles timeline from logs/metrics/deploys
+  → Suggests mitigations
+  → Tracks actions to resolution
+  → Generates postmortem document
 ```
 
 ### 4. SRE Advisory
 
-```mermaid
-flowchart TD
-    User --> SLOQuery[/slo query]
-    SLOQuery --> SREAdvisor[SRE Advisor]
-    SREAdvisor --> Fetch[Fetch SLO Data]
-    Fetch --> Calc[Calculate Error Budget]
-    Calc --> BurnRate{Burn Rate}
-    BurnRate -->|Over 50%| Freeze[Deploy Freeze]
-    BurnRate -->|25-50%| Caution[Elevated Caution]
-    BurnRate -->|Under 25%| Normal[Normal Ops]
-    Freeze --> Plan[Remediation Plan]
-    Caution --> Plan
-    Normal --> Report[Report]
-    Plan --> Report
-    Report --> Recs[Recommendations]
+```
+User runs: /slo service:payments --since 7d
+
+SRE Advisor:
+  → Fetches SLO data
+  → Calculates error budget burn rate
+  → Applies error budget policy:
+    • >50%: normal ops
+    • 25-50%: elevated caution
+    • 10-25%: deploy freeze
+    • <10%: full freeze
+  → Provides recommendations
 ```
 
 ---
