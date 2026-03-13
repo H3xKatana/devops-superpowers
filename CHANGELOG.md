@@ -14,17 +14,27 @@ All notable changes to DevOps Superpowers are documented in this file.
 - **Deployer Agent** — Full deployment lifecycle with canary and blue-green strategies
 - **Incident Commander Agent** — Incident response coordination from detection to postmortem
 - **SRE Advisor Agent** — Basic SLO tracking and error budget monitoring
-- **Core Slash Commands:**
-  - `/inspect` — Infrastructure exploration
-  - `/deploy` — Deployment with strategy selection
-  - `/rollback` — Instant rollback to previous state
-  - `/incident` — Declare and manage incidents
-  - `/slo` — Query SLO status and error budgets
+- **Architect Agent** — Architecture design and ADR generation
+- **Doc Writer Agent** — Runbooks, postmortems, and documentation generation
 
-- **External Skill Imports** — Manifest for importing skills from Superpowers registry
-- **SLO YAML Schema** — Standard format for defining service-level objectives
-- **Zero-Downtime Deployment Workflow** — Complete workflow with canary gates
-- **Incident Response Workflow** — Detection through resolution and postmortem
+### Added (Observability & Documentation)
+
+- **Observability Skills:** slo-tracker, alert-analyzer, log-investigator, trace-analyzer
+- **Documentation Skills:** runbook-generator, adr-writer, postmortem-writer, diagram-generator
+- **Security Skills:** secret-scanner, cve-checker, compliance-auditor, iam-reviewer
+
+### Added (Commands)
+
+- Core Slash Commands: `/inspect`, `/deploy`, `/rollback`, `/incident`, `/slo`
+- Additional Commands: `/audit`, `/plan`, `/document`, `/cost`, `/drift`, `/canary`, `/runbook`, `/postmortem`, `/capacity`, `/cve`, `/iam`
+
+### Added (Workflows)
+
+- Zero-Downtime Deployment Workflow
+- Incident Response Workflow
+- Disaster Recovery Workflow
+- Capacity Review Workflow
+- New Engineer Onboarding Workflow
 
 ### Features
 
@@ -43,30 +53,14 @@ All notable changes to DevOps Superpowers are documented in this file.
 
 ### Beta v0.2 — Observability & Documentation
 
-- [ ] Architect Agent
-- [ ] Doc Writer Agent
-- [ ] All observability skills (slo-tracker, alert-analyzer, log-investigator, trace-analyzer)
-- [ ] runbook-generator skill
-- [ ] postmortem-writer skill
-- [ ] `/document`, `/runbook`, `/postmortem` commands
 - [ ] DORA metrics dashboard
+- [ ] Toil registry schema
+- [ ] Error budget automation
 
 ### v0.3 — Security & Compliance
 
-- [ ] secret-scanner skill
-- [ ] cve-checker skill
-- [ ] compliance-auditor skill
-- [ ] iam-reviewer skill
-- [ ] `/audit`, `/cve`, `/iam` commands
 - [ ] Audit log framework
-
-### v0.4 — Cost & Capacity
-
-- [ ] capacity-planner skill
-- [ ] cost-analyzer skill
-- [ ] drift-detector enhanced
-- [ ] `/cost`, `/capacity`, `/drift` commands
-- [ ] Toil registry schema
+- [ ] Policy-as-code (OPA) integration
 
 ### v1.0 — Production-Ready
 
@@ -75,7 +69,6 @@ All notable changes to DevOps Superpowers are documented in this file.
 - [ ] Agent marketplace (community agents)
 - [ ] Web UI for Vault management
 - [ ] SSO integration
-- [ ] Policy-as-code (OPA) integration
 - [ ] Full documentation site
 
 ---
