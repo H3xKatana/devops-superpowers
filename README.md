@@ -8,125 +8,51 @@ DevOps Superpowers provides pre-wired AI agents, slash commands, and skills that
 
 ---
 
-## Installation
-
-Choose your AI coding assistant and follow the installation guide.
-
----
-
-### OpenCode
+## Quick Install
 
 ```bash
-# macOS
-brew install opencodeai/opencode/opencode
-
-# Linux
-curl -L https://opencode.ai/install.sh | sh
-
-# Verify
-opencode --version
-```
-
-**Quick Install DevOps Superpowers:**
-
-```bash
-# Light install (skills only)
+# Clone the repository
 git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
-cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
-
-# Full install (agents + skills)
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cd devops-superpowers
-cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
-cp -r agents/ ~/.config/opencode/agents/devops-superpowers/
 ```
 
----
-
-### Claude Code (Claude CLI)
+### Claude Code
 
 ```bash
-# macOS
-brew install anthropic/claude/claude
-
-# Linux/Windows (via curl)
-curl -s https://anthropic.com/claude-cli/install.sh | sh
-
-# Verify
-claude --version
-```
-
-**Quick Install DevOps Superpowers:**
-
-```bash
-# Light install (skills only)
-git clone https://github.com/H3xKatana/devops-superpowers.git
+# Skills only
 mkdir -p ~/.claude/skills/devops-superpowers
 cp -r skills/* ~/.claude/skills/devops-superpowers/
 
-# Full install (agents + skills)
-git clone https://github.com/H3xKatana/devops-superpowers.git
+# Full (agents + skills)
 mkdir -p ~/.claude/skills/devops-superpowers
 mkdir -p ~/.claude/agents/devops-superpowers
 cp -r skills/* ~/.claude/skills/devops-superpowers/
 cp -r agents/* ~/.claude/agents/devops-superpowers/
 ```
 
----
-
-### QwenCode (阿里云通义灵码)
+### Gemini Code
 
 ```bash
-# VS Code Extension
-code --install-extension alibaba.tongyi-lingma
-
-# JetBrains IDEs
-# Install from JetBrains Marketplace
-
-# CLI (if available)
-npm install -g @qwen/qwen-code
-```
-
-**Quick Install DevOps Superpowers:**
-
-```bash
-# Light install (skills only)
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cp -r skills/ ~/.qwen-code/skills/devops-superpowers/
-
-# Full install (agents + skills)
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cp -r skills/ ~/.qwen-code/skills/devops-superpowers/
-cp -r agents/ ~/.qwen-code/agents/devops-superpowers/
-```
-
----
-
-### Gemini Code (Google Gemini CLI)
-
-```bash
-# Install via npm
-npm install -g @google/gemini-cli
-
-# Verify
-gemini --version
-```
-
-**Quick Install DevOps Superpowers:**
-
-```bash
-# Light install (skills only)
-git clone https://github.com/H3xKatana/devops-superpowers.git
+# Skills only
 mkdir -p ~/.gemini/skills/devops-superpowers
 cp -r skills/* ~/.gemini/skills/devops-superpowers/
 
-# Full install (agents + skills)
-git clone https://github.com/H3xKatana/devops-superpowers.git
+# Full (agents + skills)
 mkdir -p ~/.gemini/skills/devops-superpowers
 mkdir -p ~/.gemini/agents/devops-superpowers
 cp -r skills/* ~/.gemini/skills/devops-superpowers/
 cp -r agents/* ~/.gemini/agents/devops-superpowers/
+```
+
+### OpenCode
+
+```bash
+# Skills only
+cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
+
+# Full (agents + skills)
+cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
+cp -r agents/ ~/.config/opencode/agents/devops-superpowers/
 ```
 
 ---
@@ -137,14 +63,6 @@ cp -r agents/* ~/.gemini/agents/devops-superpowers/
 
 Best for: Adding DevOps capabilities to existing AI agents
 
-```bash
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cd devops-superpowers
-
-# Copy skills to your AI tool's skills directory
-# See specific tool instructions above
-```
-
 **What's included:**
 - 20 skills across 5 categories (infrastructure, deployments, observability, security, documentation)
 - Slash commands
@@ -154,14 +72,6 @@ cd devops-superpowers
 ### Full Install (Agents + Skills)
 
 Best for: Complete DevOps agentic ecosystem
-
-```bash
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cd devops-superpowers
-
-# Copy skills AND agents
-# See specific tool instructions above
-```
 
 **What's included:**
 - Everything in light install
