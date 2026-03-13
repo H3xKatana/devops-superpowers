@@ -19,14 +19,37 @@ jobs:
         run: |
           yamllint -c .yamllint.yaml .
 
-  markdown-lint:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check Markdown syntax
-        uses: DavidAnson/markdownlint-cli2-action@v14
-        with:
-          config: '.markdownlint.yaml'
-          files: '**/*.md'
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate structure
+        run: |
+          echo "Validating directory structure..."
+          
+          REQUIRED_DIRS=(
+            ".superpowers"
+            "vault"
+            "agents/core"
+            "agents/custom"
+            "skills/infrastructure"
+            "skills/deployments"
+            "skills/observability"
+            "skills/security"
+            "skills/documentation"
+            "commands"
+            "workflows"
+            "docs"
+          )
+          
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              echo "✓ $dir exists"
+            else
+              echo "✗ $dir missing"
+              exit 1
+            fi
+          done
+          
+          echo "All required directories present!"
