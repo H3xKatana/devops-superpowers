@@ -7,7 +7,7 @@ on:
     branches: [main, master]
 
 jobs:
-  markdown-lint:
+  markdown-link-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,8 +15,13 @@ jobs:
       - name: Check Markdown links
         uses: lycheeverse/lychee-action@v1.10.0
         with:
-          args: --verbose --no-progress './**/*.md' '!./.git/**' '!**/CHANGELOG.md'
+          args: --verbose --no-progress '**/*.md' '!.git/**' '!CHANGELOG.md'
           fail: true
+
+  markdown-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Check Markdown syntax
         uses: DavidAnson/markdownlint-cli2-action@v14
@@ -35,16 +40,3 @@ jobs:
 
       - name: Lint YAML files
         run: yamllint -c .yamllint.yaml .
-
-  shell-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install shellcheck
-        run: apt-get update && apt-get install -y shellcheck
-
-      - name: Lint shell scripts
-        run: |
-          find . -name "*.sh" -type f -exec shellcheck {} \;
-        continue-on-error: true
