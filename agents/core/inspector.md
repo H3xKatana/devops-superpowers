@@ -12,12 +12,12 @@ Safe exploration of infrastructure state. The default agent to invoke first. Nev
 ## Required Vault Keys
 - vault.cloud.aws.account_id
 - vault.cloud.aws.region
-- vault.kubernetes.clusters[].kubeconfig
-- vault.kubernetes.clusters[].context
-- vault.vcs.github.token
-- vault.observability.prometheus.url
-- vault.observability.datadog.api_key
-- vault.observability.grafana.url
+- vault.kubernetes.clusters[].kubeconfig        # readonly: true
+- vault.kubernetes.clusters[].context            # readonly: true
+- vault.vcs.github.token                         # readonly: true
+- vault.observability.prometheus.url              # readonly: true
+- vault.observability.datadog.api_key             # readonly: true
+- vault.observability.grafana.url                 # readonly: true
 
 ## Context Collection
 Before acting, collect:
