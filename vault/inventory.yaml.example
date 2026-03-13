@@ -11,8 +11,8 @@ cloud:
   aws:
     account_id: "${AWS_ACCOUNT_ID}"
     region: us-east-1
-    access_key_id: "${AWS_ACCESS_KEY_ID}"      # never hardcode
-    secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+    access_key_id: "${AWS_ACCESS_KEY_ID}"      # ROTATION: 90 days
+    secret_access_key: "${AWS_SECRET_ACCESS_KEY}" # ROTATION: 90 days
     role_arn: "${AWS_ROLE_ARN}"
     profile: default
 
@@ -24,7 +24,7 @@ cloud:
     subscription_id: "${AZURE_SUBSCRIPTION_ID}"
     tenant_id: "${AZURE_TENANT_ID}"
     client_id: "${AZURE_CLIENT_ID}"
-    client_secret: "${AZURE_CLIENT_SECRET}"
+    client_secret: "${AZURE_CLIENT_SECRET}"     # ROTATION: 90 days
 
 # ─── Kubernetes ──────────────────────────────────────────────────
 kubernetes:
@@ -41,11 +41,11 @@ kubernetes:
 # ─── Source Control ──────────────────────────────────────────────
 vcs:
   github:
-    token: "${GITHUB_TOKEN}"
+    token: "${GITHUB_TOKEN}"                  # ROTATION: 30 days (personal), 90 days (machine)
     org: my-org
     default_branch: main
   gitlab:
-    token: "${GITLAB_TOKEN}"
+    token: "${GITLAB_TOKEN}"                  # ROTATION: 90 days
     url: https://gitlab.mycompany.com
 
 # ─── CI/CD ───────────────────────────────────────────────────────
@@ -53,23 +53,23 @@ cicd:
   jenkins:
     url: "${JENKINS_URL}"
     user: "${JENKINS_USER}"
-    token: "${JENKINS_TOKEN}"
+    token: "${JENKINS_TOKEN}"                 # ROTATION: 90 days
   argocd:
     url: "${ARGOCD_URL}"
-    token: "${ARGOCD_TOKEN}"
+    token: "${ARGOCD_TOKEN}"                   # ROTATION: 90 days
 
 # ─── Observability ───────────────────────────────────────────────
 observability:
   datadog:
-    api_key: "${DD_API_KEY}"
-    app_key: "${DD_APP_KEY}"
+    api_key: "${DD_API_KEY}"                  # ROTATION: 90 days
+    app_key: "${DD_APP_KEY}"                  # ROTATION: 90 days
     site: datadoghq.com
   pagerduty:
-    api_key: "${PD_API_KEY}"
+    api_key: "${PD_API_KEY}"                  # ROTATION: 90 days
     service_id: "${PD_SERVICE_ID}"
   grafana:
     url: "${GRAFANA_URL}"
-    token: "${GRAFANA_TOKEN}"
+    token: "${GRAFANA_TOKEN}"                  # ROTATION: 90 days
   prometheus:
     url: "${PROMETHEUS_URL}"
 
@@ -101,7 +101,7 @@ databases:
     host: "${DB_HOST_PROD}"
     port: 5432
     user: "${DB_USER_PROD}"
-    password: "${DB_PASS_PROD}"
+    password: "${DB_PASS_PROD}"               # ROTATION: 30 days
     readonly_replica: "${DB_REPLICA_PROD}"
   redis:
     host: "${REDIS_HOST}"
@@ -112,12 +112,12 @@ messaging:
   kafka:
     brokers: "${KAFKA_BROKERS}"
     sasl_username: "${KAFKA_USER}"
-    sasl_password: "${KAFKA_PASS}"
+    sasl_password: "${KAFKA_PASS}"             # ROTATION: 30 days
 
 # ─── Communication ───────────────────────────────────────────────
 communication:
   slack:
-    token: "${SLACK_TOKEN}"
+    token: "${SLACK_TOKEN}"                    # ROTATION: 90 days
     incident_channel: "#incidents"
     deploy_channel: "#deployments"
   pagerduty_webhook: "${PD_WEBHOOK}"
