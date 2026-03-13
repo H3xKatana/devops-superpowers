@@ -2,19 +2,15 @@
 
 An open-source, agentic AI ecosystem for DevOps and Site Reliability Engineers (SREs). Built on the [Superpowers](https://github.com/superpowers) framework.
 
-## Overview
+## How it works
 
 DevOps Superpowers provides pre-wired AI agents, slash commands, and skills that understand your infrastructure, incident runbooks, SLOs, and deployment pipelines. It brings SRE methodology to every operation through intelligent automation.
 
+The system activates automatically when you work with a coding agent on DevOps tasks. It doesn't just jump into executing commands—instead, it ensures proper context collection, planning, and verification at every step.
+
 ---
 
-## Quick Install
-
-```bash
-# Clone the repository
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cd devops-superpowers
-```
+## Installation
 
 ### Claude Code
 
@@ -30,7 +26,7 @@ cp -r skills/* ~/.claude/skills/devops-superpowers/
 cp -r agents/* ~/.claude/agents/devops-superpowers/
 ```
 
-### Gemini Code
+### Gemini CLI
 
 ```bash
 # Skills only
@@ -52,92 +48,7 @@ cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
 
 # Full (agents + skills)
 cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
-cp -r agents/ ~/.config/opencode/agents/devops-superpowers/
-```
-
----
-
-## Installation Types
-
-### Light Install (Skills Only)
-
-Best for: Adding DevOps capabilities to existing AI agents
-
-**What's included:**
-- 20 skills across 5 categories (infrastructure, deployments, observability, security, documentation)
-- Slash commands
-- Workflows
-- Vault schema
-
-### Full Install (Agents + Skills)
-
-Best for: Complete DevOps agentic ecosystem
-
-**What's included:**
-- Everything in light install
-- 7 core agents (Inspector, Operator, Deployer, Incident Commander, SRE Advisor, Architect, Doc Writer)
-- Custom agent templates
-
----
-
-## Use Cases
-
-### 1. Infrastructure Exploration
-
-```
-User runs: /inspect cluster prod-eks
-
-Inspector Agent collects context:
-  → Kubernetes cluster topology
-  → Cloud resources (AWS/GCP/Azure)
-  → Terraform state
-  → Recent deployments & incidents
-
-Returns: topology map, SLO status, resource inventory
-```
-
-### 2. Zero-Downtime Deployment
-
-```
-User runs: /deploy service:payments image:v2.1.0 --env prod --strategy canary
-
-Deployer Agent:
-  → Pre-checks (change freeze, SLO, incidents)
-  → Deploy 5% canary
-  → Monitor metrics (error rate, latency)
-  → Auto-promote or auto-rollback
-  → Verify health post-deploy
-
-Result: promoted to 100% or rolled back
-```
-
-### 3. Incident Response
-
-```
-Alert fires → /incident declare sev:2 title:"Payment API 500 spike"
-
-Incident Commander:
-  → Creates war room (Slack + PagerDuty)
-  → Assembles timeline from logs/metrics/deploys
-  → Suggests mitigations
-  → Tracks actions to resolution
-  → Generates postmortem document
-```
-
-### 4. SRE Advisory
-
-```
-User runs: /slo service:payments --since 7d
-
-SRE Advisor:
-  → Fetches SLO data
-  → Calculates error budget burn rate
-  → Applies error budget policy:
-    • >50%: normal ops
-    • 25-50%: elevated caution
-    • 10-25%: deploy freeze
-    • <10%: full freeze
-  → Provides recommendations
+cp -r agents/ ~/.config/opencode/skills/devops-superpowers/
 ```
 
 ---
@@ -145,7 +56,6 @@ SRE Advisor:
 ## Quick Start
 
 ```bash
-# Clone and enter directory
 git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 
@@ -154,36 +64,61 @@ cp vault/inventory.yaml.example vault/inventory.yaml
 
 # Configure environment
 # Edit vault/inventory.yaml with your ${VAR} references
-
-# Run Inspector to verify setup
-/inspect cluster prod-eks
 ```
 
 ---
 
-## Core Tenets
+## For LLMs
 
-| Tenet | Description |
-|-------|-------------|
-| **Context First** | Never take action without collecting full infrastructure context |
-| **Read Before Write** | Dedicated read-only agent for safe exploration |
-| **SRE Methodology** | Every action guided by SLOs, error budgets, toil reduction |
-| **Secure by Default** | All secrets live in the Vault — never in prompts or logs |
-| **Composable** | Skills are modular and import-first |
+### Codex
+
+Tell Codex:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/H3xKatana/devops-superpowers/refs/heads/main/.codex/INSTALL.md
+```
+
+### OpenCode
+
+Tell OpenCode:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/H3xKatana/devops-superpowers/refs/heads/main/.opencode/INSTALL.md
+```
+
+### Claude Code Plugin
+
+Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers). DevOps Superpowers skills will be included in a future release.
 
 ---
 
-## Features
+## The Basic Workflow
 
-### AI Agents
+1. **Infrastructure Inspection** - Use `/inspect` to safely explore infrastructure before taking action. The Inspector agent collects Kubernetes topology, cloud resources, Terraform state, and recent deployments.
 
-- **Inspector** — Safe read-only infrastructure exploration
-- **Operator** — Day-to-day operational tasks
-- **Deployer** — Zero-downtime deployments (canary, blue-green)
-- **Incident Commander** — Full incident lifecycle management
-- **SRE Advisor** — SLO tracking, error budgets, toil identification
-- **Architect** — Architecture design and ADRs
-- **Doc Writer** — Runbooks, postmortems, documentation
+2. **Planning** - When deploying or making changes, the system applies SRE methodology: checks change freezes, SLO status, and incident states before proceeding.
+
+3. **Deployment** - Use `/deploy` with strategy selection (canary, blue-green, rolling). The system monitors metrics and automatically promotes or rolls back based on error rates and latency.
+
+4. **Incident Response** - Use `/incident` to declare incidents. The Incident Commander creates war rooms, assembles timelines, suggests mitigations, and generates postmortems.
+
+5. **SRE Advisory** - Use `/slo` to query SLO status. The system calculates error budget burn rate and applies appropriate deployment policies.
+
+---
+
+## What's Inside
+
+### Agents
+
+| Agent | Purpose |
+|-------|---------|
+| **Inspector** | Read-only infrastructure exploration |
+| **Operator** | Day-to-day operational tasks |
+| **Deployer** | Zero-downtime deployments (canary, blue-green) |
+| **Incident Commander** | Full incident lifecycle management |
+| **SRE Advisor** | SLO tracking, error budgets, toil identification |
+| **Architect** | Architecture design and ADRs |
+| **Doc Writer** | Runbooks, postmortems, documentation |
 
 ### Slash Commands
 
@@ -199,7 +134,6 @@ cp vault/inventory.yaml.example vault/inventory.yaml
 | `/document` | Generate documentation |
 | `/cost` | Cloud cost analysis |
 | `/drift` | Detect infrastructure drift |
-| `/canary` | Canary deployment management |
 
 ### Skills
 
@@ -215,18 +149,25 @@ cp vault/inventory.yaml.example vault/inventory.yaml
 
 ---
 
+## Core Tenets
+
+| Tenet | Description |
+|-------|-------------|
+| **Context First** | Never take action without collecting full infrastructure context |
+| **Read Before Write** | Dedicated read-only agent for safe exploration |
+| **SRE Methodology** | Every action guided by SLOs, error budgets, toil reduction |
+| **Secure by Default** | All secrets live in the Vault — never in prompts or logs |
+| **Composable** | Skills are modular and import-first |
+
+---
+
 ## Documentation
 
 - [Getting Started](docs/getting-started.md) — Setup and first deployment
 - [Vault Setup](docs/vault-setup.md) — Detailed vault configuration
 - [SRE Methodology](docs/sre-methodology.md) — SLOs, error budgets, DORA
 - [Architecture](docs/architecture.md) — System design overview
-
----
-
-## Version History
-
-See [CHANGELOG.md](CHANGELOG.md) for version history.
+- [CHANGELOG](CHANGELOG.md) — Version history
 
 ---
 
@@ -234,14 +175,14 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 1. Check `.superpowers/imports.yaml` — does the skill already exist?
 2. Create `skills/[category]/[skill-name].md` for new skills
-3. Use `agents/custom/template.md` for new agents
+3. Use `agents/core/template.md` for new agents
 4. Open a PR for review
 
 ---
 
 ## License
 
-MIT
+MIT License
 
 ---
 
