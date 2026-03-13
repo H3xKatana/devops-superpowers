@@ -12,13 +12,6 @@ DevOps Superpowers provides pre-wired AI agents, slash commands, and skills that
 
 Choose your AI coding assistant and follow the installation guide.
 
-### Prerequisites
-
-```bash
-# Common prerequisites
-git, curl, jq, yq
-```
-
 ---
 
 ### OpenCode
@@ -38,12 +31,12 @@ opencode --version
 
 ```bash
 # Light install (skills only)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
 
 # Full install (agents + skills)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 cp -r skills/ ~/.config/opencode/skills/devops-superpowers/
 cp -r agents/ ~/.config/opencode/agents/devops-superpowers/
@@ -68,12 +61,12 @@ claude --version
 
 ```bash
 # Light install (skills only)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 mkdir -p ~/.claude/skills/devops-superpowers
 cp -r skills/* ~/.claude/skills/devops-superpowers/
 
 # Full install (agents + skills)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 mkdir -p ~/.claude/skills/devops-superpowers
 mkdir -p ~/.claude/agents/devops-superpowers
 cp -r skills/* ~/.claude/skills/devops-superpowers/
@@ -99,11 +92,11 @@ npm install -g @qwen/qwen-code
 
 ```bash
 # Light install (skills only)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cp -r skills/ ~/.qwen-code/skills/devops-superpowers/
 
 # Full install (agents + skills)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cp -r skills/ ~/.qwen-code/skills/devops-superpowers/
 cp -r agents/ ~/.qwen-code/agents/devops-superpowers/
 ```
@@ -124,12 +117,12 @@ gemini --version
 
 ```bash
 # Light install (skills only)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 mkdir -p ~/.gemini/skills/devops-superpowers
 cp -r skills/* ~/.gemini/skills/devops-superpowers/
 
 # Full install (agents + skills)
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 mkdir -p ~/.gemini/skills/devops-superpowers
 mkdir -p ~/.gemini/agents/devops-superpowers
 cp -r skills/* ~/.gemini/skills/devops-superpowers/
@@ -145,7 +138,7 @@ cp -r agents/* ~/.gemini/agents/devops-superpowers/
 Best for: Adding DevOps capabilities to existing AI agents
 
 ```bash
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 
 # Copy skills to your AI tool's skills directory
@@ -163,7 +156,7 @@ cd devops-superpowers
 Best for: Complete DevOps agentic ecosystem
 
 ```bash
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 
 # Copy skills AND agents
@@ -257,7 +250,7 @@ flowchart TD
 
 ```bash
 # Clone and enter directory
-git clone https://github.com/your-org/devops-superpowers.git
+git clone https://github.com/H3xKatana/devops-superpowers.git
 cd devops-superpowers
 
 # Copy vault template
@@ -332,17 +325,6 @@ cp vault/inventory.yaml.example vault/inventory.yaml
 - [Vault Setup](docs/vault-setup.md) — Detailed vault configuration
 - [SRE Methodology](docs/sre-methodology.md) — SLOs, error budgets, DORA
 - [Architecture](docs/architecture.md) — System design overview
-
----
-
-## Requirements
-
-- `kubectl` >= 1.28
-- `helm` >= 3.12
-- `terraform` >= 1.6
-- `aws-cli` >= 2.0
-- `gh` >= 2.40
-- Kubernetes cluster (any cloud)
 
 ---
 
