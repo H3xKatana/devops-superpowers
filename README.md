@@ -186,4 +186,4 @@ MIT License
 
 ---
 
-**DevOps Superpowers** — Built on the shoulders of the SRE community
+**DevOps Superpowers** — Built on the [Superpowers](https://github.com/obra/superpowers) framework
