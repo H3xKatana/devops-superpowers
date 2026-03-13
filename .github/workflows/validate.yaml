@@ -1,0 +1,141 @@
+name: Validate
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  structure-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate directory structure
+        run: |
+          echo "Checking required directories..."
+          
+          REQUIRED_DIRS=(
+            ".superpowers"
+            "vault"
+            "agents/core"
+            "agents/custom"
+            "skills/infrastructure"
+            "skills/deployments"
+            "skills/observability"
+            "skills/security"
+            "skills/documentation"
+            "commands"
+            "workflows"
+            "docs"
+          )
+          
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              echo "✓ $dir exists"
+            else
+              echo "✗ $dir missing"
+              exit 1
+            fi
+          done
+
+      - name: Validate required files exist
+        run: |
+          echo "Checking required files..."
+          
+          REQUIRED_FILES=(
+            "SPEC.md"
+            "README.md"
+            "CHANGELOG.md"
+            ".superpowers/imports.yaml"
+            "vault/schema.md"
+            "vault/inventory.yaml.example"
+            "agents/core/inspector.md"
+            "agents/core/operator.md"
+            "agents/core/deployer.md"
+            "agents/core/incident-commander.md"
+            "agents/core/sre-advisor.md"
+            "agents/core/architect.md"
+            "agents/core/doc-writer.md"
+            "skills/README.md"
+          )
+          
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            else
+              echo "✗ $file missing"
+              exit 1
+            fi
+          done
+
+      - name: Count skills
+        run: |
+          SKILL_COUNT=$(find skills -name "*.md" -not -name "README.md" | wc -l)
+          echo "Found $SKILL_COUNT skills"
+          if [ "$SKILL_COUNT" -lt 16 ]; then
+            echo "Expected at least 16 skills, found $SKILL_COUNT"
+            exit 1
+          fi
+
+      - name: Count agents
+        run: |
+          AGENT_COUNT=$(find agents/core -name "*.md" | wc -l)
+          echo "Found $AGENT_COUNT core agents"
+          if [ "$AGENT_COUNT" -lt 7 ]; then
+            echo "Expected 7 core agents, found $AGENT_COUNT"
+            exit 1
+          fi
+
+      - name: Count commands
+        run: |
+          CMD_COUNT=$(find commands -maxdepth 1 -name "*.md" -not -name "README.md" | wc -l)
+          echo "Found $CMD_COUNT commands"
+          if [ "$CMD_COUNT" -lt 8 ]; then
+            echo "Expected at least 8 commands, found $CMD_COUNT"
+            exit 1
+          fi
+
+      - name: Count workflows
+        run: |
+          WF_COUNT=$(find workflows -name "*.md" | wc -l)
+          echo "Found $WF_COUNT workflows"
+          if [ "$WF_COUNT" -lt 5 ]; then
+            echo "Expected at least 5 workflows, found $WF_COUNT"
+            exit 1
+          fi
+
+  yaml-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install yaml library
+        run: pip install pyyaml
+
+      - name: Validate YAML syntax
+        run: |
+          python3 -c "
+          import yaml
+          import sys
+          
+          yaml_files = [
+            '.superpowers/imports.yaml',
+            'vault/inventory.yaml.example'
+          ]
+          
+          for f in yaml_files:
+            try:
+              with open(f) as file:
+                yaml.safe_load(file)
+              print(f'✓ {f} is valid YAML')
+            except Exception as e:
+              print(f'✗ {f}: {e}')
+              sys.exit(1)
+          "
