@@ -1,0 +1,149 @@
+# vault/inventory.yaml
+# DO NOT COMMIT WITH REAL VALUES — use environment references or a secrets manager
+
+metadata:
+  environment: production          # production | staging | dev
+  owner: platform-team
+  last_updated: 2025-01-01
+
+# ─── Cloud Providers ────────────────────────────────────────────
+cloud:
+  aws:
+    account_id: "${AWS_ACCOUNT_ID}"
+    region: us-east-1
+    access_key_id: "${AWS_ACCESS_KEY_ID}"      # never hardcode
+    secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+    role_arn: "${AWS_ROLE_ARN}"
+    profile: default
+
+  gcp:
+    project_id: "${GCP_PROJECT_ID}"
+    service_account_key: "${GCP_SA_KEY_PATH}"  # path to key file
+
+  azure:
+    subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+    tenant_id: "${AZURE_TENANT_ID}"
+    client_id: "${AZURE_CLIENT_ID}"
+    client_secret: "${AZURE_CLIENT_SECRET}"
+
+# ─── Kubernetes ──────────────────────────────────────────────────
+kubernetes:
+  clusters:
+    - name: prod-eks
+      kubeconfig: "${KUBECONFIG_PROD}"
+      context: prod-context
+      readonly: false
+    - name: staging-eks
+      kubeconfig: "${KUBECONFIG_STAGING}"
+      context: staging-context
+      readonly: false
+
+# ─── Source Control ──────────────────────────────────────────────
+vcs:
+  github:
+    token: "${GITHUB_TOKEN}"
+    org: my-org
+    default_branch: main
+  gitlab:
+    token: "${GITLAB_TOKEN}"
+    url: https://gitlab.mycompany.com
+
+# ─── CI/CD ───────────────────────────────────────────────────────
+cicd:
+  jenkins:
+    url: "${JENKINS_URL}"
+    user: "${JENKINS_USER}"
+    token: "${JENKINS_TOKEN}"
+  argocd:
+    url: "${ARGOCD_URL}"
+    token: "${ARGOCD_TOKEN}"
+
+# ─── Observability ───────────────────────────────────────────────
+observability:
+  datadog:
+    api_key: "${DD_API_KEY}"
+    app_key: "${DD_APP_KEY}"
+    site: datadoghq.com
+  pagerduty:
+    api_key: "${PD_API_KEY}"
+    service_id: "${PD_SERVICE_ID}"
+  grafana:
+    url: "${GRAFANA_URL}"
+    token: "${GRAFANA_TOKEN}"
+  prometheus:
+    url: "${PROMETHEUS_URL}"
+
+# ─── Infrastructure ──────────────────────────────────────────────
+infrastructure:
+  terraform:
+    state_bucket: "${TF_STATE_BUCKET}"
+    lock_table: "${TF_LOCK_TABLE}"
+    workspace: production
+  vault:                           # HashiCorp Vault (if used)
+    url: "${HCV_URL}"
+    token: "${HCV_TOKEN}"
+
+# ─── SSH & Keys ──────────────────────────────────────────────────
+ssh:
+  keys:
+    - name: prod-bastion
+      path: "${SSH_KEY_PROD}"
+      user: ec2-user
+      hosts:
+        - bastion.prod.example.com
+    - name: staging-bastion
+      path: "${SSH_KEY_STAGING}"
+      user: ec2-user
+
+# ─── Databases ───────────────────────────────────────────────────
+databases:
+  postgres_prod:
+    host: "${DB_HOST_PROD}"
+    port: 5432
+    user: "${DB_USER_PROD}"
+    password: "${DB_PASS_PROD}"
+    readonly_replica: "${DB_REPLICA_PROD}"
+  redis:
+    host: "${REDIS_HOST}"
+    port: 6379
+
+# ─── Messaging & Queues ──────────────────────────────────────────
+messaging:
+  kafka:
+    brokers: "${KAFKA_BROKERS}"
+    sasl_username: "${KAFKA_USER}"
+    sasl_password: "${KAFKA_PASS}"
+
+# ─── Communication ───────────────────────────────────────────────
+communication:
+  slack:
+    token: "${SLACK_TOKEN}"
+    incident_channel: "#incidents"
+    deploy_channel: "#deployments"
+  pagerduty_webhook: "${PD_WEBHOOK}"
+
+# ─── CLI Tools Available ─────────────────────────────────────────
+cli_tools:
+  - name: kubectl
+    version: ">=1.28"
+    installed: true
+  - name: helm
+    version: ">=3.12"
+    installed: true
+  - name: terraform
+    version: ">=1.6"
+    installed: true
+  - name: aws-cli
+    version: ">=2.0"
+    installed: true
+  - name: gh                        # GitHub CLI — import from Superpowers
+    version: ">=2.40"
+    installed: true
+  - name: argocd
+    installed: true
+  - name: docker
+    installed: true
+  - name: jq
+    installed: true
+  - name: yq
+    installed: true

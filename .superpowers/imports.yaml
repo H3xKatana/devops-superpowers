@@ -1,0 +1,58 @@
+# .superpowers/imports.yaml
+imports:
+  - name: github-cli
+    source: superpowers/github-cli
+    version: latest
+    reason: "Full GitHub CLI integration — gh commands for PRs, issues, workflows"
+
+  - name: kubectl
+    source: superpowers/kubectl
+    version: latest
+    reason: "Kubernetes CLI operations"
+
+  - name: terraform
+    source: superpowers/terraform
+    version: latest
+    reason: "Terraform plan/apply/state operations"
+
+  - name: helm
+    source: superpowers/helm
+    version: latest
+    reason: "Helm chart management"
+
+  - name: aws-cli
+    source: superpowers/aws-cli
+    version: latest
+    reason: "AWS CLI operations"
+
+  - name: docker
+    source: superpowers/docker
+    version: latest
+    reason: "Container build and push operations"
+
+  - name: datadog
+    source: superpowers/datadog
+    version: latest
+    reason: "Datadog metrics and monitors API"
+
+  - name: pagerduty
+    source: superpowers/pagerduty
+    version: latest
+    reason: "Incident management and on-call API"
+
+  - name: slack
+    source: superpowers/slack
+    version: latest
+    reason: "Slack messaging and channel management"
+
+  - name: jira
+    source: superpowers/jira
+    version: latest
+    reason: "Issue tracking for postmortem action items"
+    optional: true
+
+  - name: argocd
+    source: superpowers/argocd
+    version: latest
+    reason: "GitOps deployment management"
+    optional: true
