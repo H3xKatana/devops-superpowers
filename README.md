@@ -176,72 +176,72 @@ cd devops-superpowers
 
 ```mermaid
 flowchart LR
-    A[User] --> B[/inspect]
-    B --> C[Inspector Agent]
-    C --> D[Collect Context]
-    D --> E[Kubernetes]
-    D --> E2[AWS/GCP/Azure]
-    D --> E3[Terraform State]
-    E --> F[Map Topology]
-    E2 --> F
-    E3 --> F
-    F --> G[Return Results]
+    User --> InspectCmd[/inspect]
+    InspectCmd --> Inspector[Inspector Agent]
+    Inspector --> Collect[Collect Context]
+    Collect --> K8s[Kubernetes]
+    Collect --> Cloud[AWS/GCP/Azure]
+    Collect --> TF[Terraform State]
+    K8s --> Topology[Map Topology]
+    Cloud --> Topology
+    TF --> Topology
+    Topology --> Results[Return Results]
 ```
 
 ### 2. Zero-Downtime Deployment
 
 ```mermaid
 flowchart TD
-    A[User] --> B[/deploy canary]
-    B --> C[Deployer Agent]
-    C --> D{Pre-checks}
-    D -->|Fail| E[Abort & Notify]
-    D -->|Pass| F[Deploy 5% Canary]
-    F --> G[Monitor SLOs]
-    G --> H{Healthy?}
-    H -->|Yes| I[Promote 25%]
-    H -->|No| J[Auto Rollback]
-    I --> K[Promote 50%]
-    K --> L[Promote 100%]
-    L --> M[Success]
+    User --> DeployCmd[/deploy canary]
+    DeployCmd --> Deployer[Deployer Agent]
+    Deployer --> PreCheck{Pre-checks}
+    PreCheck -->|Fail| Abort[Abort & Notify]
+    PreCheck -->|Pass| Canary[Deploy 5% Canary]
+    Canary --> Monitor[Monitor SLOs]
+    Monitor --> Healthy{Healthy?}
+    Healthy -->|Yes| Promote25[Promote 25%]
+    Healthy -->|No| Rollback[Auto Rollback]
+    Promote25 --> Promote50[Promote 50%]
+    Promote50 --> Promote100[Promote 100%]
+    Promote100 --> Success[Success]
 ```
 
 ### 3. Incident Response
 
 ```mermaid
 flowchart LR
-    A[Alert] --> B[/incident declare]
-    B --> C[Incident Commander]
-    C --> D[Create War Room]
-    D --> E[Assemble Timeline]
-    E --> F[Analyze Logs]
-    E --> F2[Check Metrics]
-    E --> F3[Review Deploys]
-    F --> G[Suggest Mitigations]
-    F2 --> G
-    F3 --> G
-    G --> H[Engineer Action]
-    H --> I[Resolve]
-    I --> J[Generate Postmortem]
+    Alert --> IncidentCmd[/incident declare]
+    IncidentCmd --> IC[Incident Commander]
+    IC --> WarRoom[Create War Room]
+    WarRoom --> Timeline[Assemble Timeline]
+    Timeline --> Logs[Analyze Logs]
+    Timeline --> Metrics[Check Metrics]
+    Timeline --> Deploys[Review Deploys]
+    Logs --> Mitigate[Suggest Mitigations]
+    Metrics --> Mitigate
+    Deploys --> Mitigate
+    Mitigate --> Action[Engineer Action]
+    Action --> Resolve[Resolve]
+    Resolve --> Postmortem[Generate Postmortem]
 ```
 
 ### 4. SRE Advisory
 
 ```mermaid
 flowchart TD
-    A[User] --> B[/slo query]
-    B --> C[SRE Advisor]
-    C --> D[Fetch SLO Data]
-    D --> E[Calculate Error Budget]
-    E --> F{Burn Rate}
-    F -->|>50%| G[Deploy Freeze]
-    F -->|25-50%| H[Elevated Caution]
-    F -->|>50%| I[Normal Ops]
-    G --> J[Remediation Plan]
-    H --> J
-    I --> K[Report]
-    J --> K
-    K --> L[Recommendations]
+    User --> SLOQuery[/slo query]
+    SLOQuery --> SREAdvisor[SRE Advisor]
+    SREAdvisor --> Fetch[Fetch SLO Data]
+    Fetch --> Calc[Calculate Error Budget]
+    Calc --> BurnRate{Burn Rate}
+    BurnRate -->|Over 50%| Freeze[Deploy Freeze]
+    BurnRate -->|25-50%| Caution[Elevated Caution]
+    BurnRate -->|Under 25%| Normal[Normal Ops]
+    Freeze --> Plan[Remediation Plan]
+    Caution --> Plan
+    Normal --> Report[Report]
+    Plan --> Report
+    Report --> Recs[Recommendations]
 ```
 
 ---
