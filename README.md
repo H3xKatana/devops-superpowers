@@ -12,34 +12,6 @@ The system activates automatically when you work with a coding agent on DevOps t
 
 ## Installation
 
-### Claude Code
-
-```bash
-# Skills only
-mkdir -p ~/.claude/skills/devops-superpowers
-cp -r skills/* ~/.claude/skills/devops-superpowers/
-
-# Full (agents + skills)
-mkdir -p ~/.claude/skills/devops-superpowers
-mkdir -p ~/.claude/agents/devops-superpowers
-cp -r skills/* ~/.claude/skills/devops-superpowers/
-cp -r agents/* ~/.claude/agents/devops-superpowers/
-```
-
-### Gemini CLI
-
-```bash
-# Skills only
-mkdir -p ~/.gemini/skills/devops-superpowers
-cp -r skills/* ~/.gemini/skills/devops-superpowers/
-
-# Full (agents + skills)
-mkdir -p ~/.gemini/skills/devops-superpowers
-mkdir -p ~/.gemini/agents/devops-superpowers
-cp -r skills/* ~/.gemini/skills/devops-superpowers/
-cp -r agents/* ~/.gemini/agents/devops-superpowers/
-```
-
 ### OpenCode
 
 ```bash
@@ -53,30 +25,7 @@ cp -r agents/ ~/.config/opencode/skills/devops-superpowers/
 
 ---
 
-## Quick Start
-
-```bash
-git clone https://github.com/H3xKatana/devops-superpowers.git
-cd devops-superpowers
-
-# Copy vault template
-cp vault/inventory.yaml.example vault/inventory.yaml
-
-# Configure environment
-# Edit vault/inventory.yaml with your ${VAR} references
-```
-
----
-
 ## For LLMs
-
-### Codex
-
-Tell Codex:
-
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/H3xKatana/devops-superpowers/refs/heads/main/.codex/INSTALL.md
-```
 
 ### OpenCode
 
@@ -85,10 +34,6 @@ Tell OpenCode:
 ```
 Fetch and follow instructions from https://raw.githubusercontent.com/H3xKatana/devops-superpowers/refs/heads/main/.opencode/INSTALL.md
 ```
-
-### Claude Code Plugin
-
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers). DevOps Superpowers skills will be included in a future release.
 
 ---
 
