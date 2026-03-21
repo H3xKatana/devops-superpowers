@@ -1,19 +1,24 @@
 # .superpowers/imports.yaml
 imports:
-  - name: github-cli
-    source: superpowers/github-cli
-    version: latest
-    reason: "Full GitHub CLI integration — gh commands for PRs, issues, workflows"
+- name: github-cli
+  source: superpowers/github-cli
+  version: latest
+  reason: "Full GitHub CLI integration — gh commands for PRs, issues, workflows"
 
-  - name: kubectl
-    source: superpowers/kubectl
-    version: latest
-    reason: "Kubernetes CLI operations"
+- name: kubectl
+  source: superpowers/kubectl
+  version: latest
+  reason: "Kubernetes CLI operations"
 
-  - name: terraform
-    source: superpowers/terraform
-    version: latest
-    reason: "Terraform plan/apply/state operations"
+- name: terraform
+  source: superpowers/terraform
+  version: latest
+  reason: "Terraform plan/apply/state operations"
+
+- name: terraform-skill
+  source: antonbabenko/terraform-skill
+  version: latest
+  reason: "Advanced Terraform/OpenTofu best practices, testing frameworks, CI/CD patterns, security scanning"
 
   - name: helm
     source: superpowers/helm
