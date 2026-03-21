@@ -1,0 +1,17 @@
+{
+  "retryOn429": true,
+  "retryCount": 3,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206],
+  "ignorePatterns": [
+    {
+      "pattern": "^https://localhost"
+    },
+    {
+      "pattern": "^https://.*\\.internal\\."
+    },
+    {
+      "pattern": "^https://raw\\.githubusercontent\\.com/.*"
+    }
+  ]
+}
